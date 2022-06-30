@@ -1,0 +1,11 @@
+{
+"development": {
+        "username" : "root",
+        "password" : "admin",
+        "database" : "aplicativo",
+        "host"     : "localhost",
+        "dialect"  : "mysql"
+    },
+"urlRootNode" : "http://192.168.18.2:3000/"
+
+}
