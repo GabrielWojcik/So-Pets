@@ -93,7 +93,7 @@ export default function LoginClinica(props) {
             
             <Button title="Entrar" style={styles.btnLogin} color="#00a000"
               onPress={() =>{
-              sendForm()
+                props.navigation.navigate('homeClinicas')
             }}>
             </Button>
         </View>

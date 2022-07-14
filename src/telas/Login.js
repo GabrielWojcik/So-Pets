@@ -3,6 +3,7 @@ import { Text, Image, StyleSheet, ImageBackground, View, TextInput, TouchableOpa
 import {Ionicons} from '@expo/vector-icons';
 import imagemLogin from '../../assets/imagemTelaLogin.jpg';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import config from "../config/config.json";
 
 const image = { uri: "../../assets/imagemTelaLogin.jpg"};
 
@@ -27,20 +28,26 @@ export default function Login(props) {
     //Envio do formulário de login
     async function sendForm()
     {
-        let response = await fetch('http://192.168.18.2:3000/login', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: user,
-                password: password
-            })
-        });
+        console.log('Entrei na função login')
+        
+        let response = await fetch(`${config.urlRootNode}login`, {
+            //let response = await fetch('http://192.168.18.30/login', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
 
+                },
+                body: JSON.stringify({
+                    name: user,
+                    password: password
+                })
+            });
+            
+        console.log('entreiii')
         let json = await response.json();
-        console.log(json);
+        //let json = await response.text();
+        //console.log(json);
         if(json === 'error'){
             setDisplay('flex');
             setTimeout(()=>{
@@ -93,12 +100,18 @@ export default function Login(props) {
 
 
         <View style={styles.containerBtn}>
-            
+           
             <Button title="Entrar" style={styles.btnLogin} color="#00a000"
               onPress={() =>{
               sendForm()
             }}>
             </Button>
+
+            {/* <Button title="Entrar" style={styles.btnLogin} color="#00a000"
+              onPress={() =>{
+                props.navigation.navigate('home')
+            }}>
+            </Button> */}
         </View>
 
         <View style={styles.containerCadastro}>
